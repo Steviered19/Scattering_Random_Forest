@@ -6,7 +6,7 @@ implicit none
 integer :: n, dim, AllocateStatus, DeallocateStatus
 real :: dummy
 ! useful variables
-character(len=255), dimension (:), allocatable :: s1, s2, s3, s4, s5 !s denotes strings with no intrinsic numerical values
+character(len=255), dimension (:), allocatable :: s1, s2, s3, s4, s5 !s denotes strings with no intrinsic numerical values, length is arbitrary to ensure there will always be excess length 
 real, dimension (:), allocatable :: r1, r2, r3, r4, r5, r6, r7, r8, r9, i1 !r denotes values of data points i denotes number of lines of data in data set
 integer :: line, z, x !3 different notations for the line number
 
