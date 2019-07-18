@@ -20,6 +20,11 @@ open(newunit=np_dat_output, file="np.dat.csv", status='unknown')
 open(newunit=pp_dat_output, file="pp.dat.csv", status='unknown')
 
 !read input and write to output
+!write header line on output files
+write(np_dat_output,6) "energy", "scattering angle", "experimental value", "statistical error", "reaction type", &
+    & "observable", "systematic error", "normalization"
+write(pp_dat_output,6) "energy", "scattering angle", "experimental value", "statistical error", "reaction type", &
+& "observable", "systematic error", "normalization"
 
 !np data
 np_line=1 !initialize at line 1
@@ -60,7 +65,8 @@ end do
 3 format(f10.6, i4, 2f7.3,a15,a2,a7)
 4 format(2f13.6, 2f13.5)
 !define format of lines in output data files
-5 format(2(f13.6,a2), 2(f13.5,a2), 2a2, a7, a2, f7.3, a2, f7.3)
+5 format(f13.6,a2,f13.6,a2,8x,f13.5,a2,2x,f13.5,a2,9x,a2,a2,8x,a7,a2,4x,f7.3,a2,10x,f7.3)
+6 format(7x,a6,5x,a16,2x,a18,2x,a17,2x,a13,2x,a10,2x,a16,2x,a13)
 
 !close all files
 close(np_dat_input)
