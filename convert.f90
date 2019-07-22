@@ -21,11 +21,11 @@ open(newunit=pp_dat_output, file="pp.dat.csv", status='unknown')
 
 !read input and write to output
 !write header line on output files
-write(np_dat_output,6) "energy", ', ', "scattering angle", ', ', "experimental value", ', ',&
-    &"statistical error", ', ', "reaction type", ', ',"observable", ', ', "systematic error", ', ',&
+write(np_dat_output,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
+    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
     &"normalization"
-write(pp_dat_output,6) "energy", ', ', "scattering angle", ', ', "experimental value", ', ',&
-    &"statistical error", ', ', "reaction type", ', ',"observable", ', ', "systematic error", ', ',&
+write(pp_dat_output,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
+    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
     &"normalization"
 
 !np data
@@ -37,9 +37,9 @@ do
     read(np_dat_input,*) !bibliographic line
     do z=1, collected_data_points
         read(np_dat_input,4) lab_energy, scattering_angle, experimental_value, statistical_error !4 columns of data
-        write(np_dat_output,5) lab_energy, ', ', scattering_angle, ', ', &
-            & experimental_value, ', ', statistical_error, ', ', reaction_type, ', ', &
-            & observable, ', ', systematic_error, ', ', normalization !ouput to .csv file
+        write(np_dat_output,5) lab_energy, ',', scattering_angle, ',', &
+            & experimental_value, ',', statistical_error, ',', reaction_type, ',', &
+            & observable, ',', systematic_error, ',', normalization !ouput to .csv file
     end do
 np_line=np_line+1 !move to next data set
 end do
@@ -54,9 +54,9 @@ do
     read(pp_dat_input,*) !bibliographic line
     do z=1, collected_data_points
         read(pp_dat_input,4) lab_energy, scattering_angle, experimental_value, statistical_error !4 columns of data
-        write(pp_dat_output,5) lab_energy, ', ', scattering_angle, ', ', experimental_value, ', ', &
-            & statistical_error, ', ', reaction_type, ', ', observable, ', ', &
-            & systematic_error, ', ', normalization !ouput to .csv file
+        write(pp_dat_output,5) lab_energy, ',', scattering_angle, ',', experimental_value, ',', &
+            & statistical_error, ',', reaction_type, ',', observable, ',', &
+            & systematic_error, ',', normalization !ouput to .csv file
     end do
     pp_line=pp_line+1 !move to next data set
 end do
@@ -64,11 +64,11 @@ end do
 
 
 !define format of lines in input data files
-3 format(f10.6, i4, 2f7.3,a15,a2,a7)
+3 format(f10.6, i4, 2f7.3,a14,a3,a6)
 4 format(2f13.6, 2f13.5)
 !define format of lines in output data files
-5 format(f13.6,a2,f13.6,a2,f13.5,a2,f13.5,a2,a2,a2,a7,a2,f7.3,a2,f7.3)
-6 format(a6,a2,a16,a2,a18,a2,a17,a2,a13,a2,a10,a2,a16,a2,a13)
+5 format(f10.6,a1,f10.6,a1,f11.5,a1,f9.5,a1,a2,a1,a7,a1,f6.3,a1,f6.3)
+6 format(a6,a1,a16,a1,a18,a1,a17,a1,a13,a1,a10,a1,a16,a1,a13)
 
 !close all files
 close(np_dat_input)
