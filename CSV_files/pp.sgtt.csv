@@ -1,0 +1,6 @@
+energy,scattering_angle,experimental_value,statistical_error,reaction_type,observable,systematic_error,normalization
+202.699997,  0.000000,    0.29000,  0.38000,PP,   SGTT, 0.069,-1.000
+295.000000,  0.000000,   -0.36700,  1.00000,PP,   SGTT, 0.005,-1.000
+304.000000,  0.000000,   -1.59000,  1.02000,PP,   SGTT, 0.005,-1.000
+325.100006,  0.000000,    0.16000,  0.37000,PP,   SGTT, 0.069,-1.000
+328.000000,  0.000000,    0.17300,  1.00000,PP,   SGTT,-0.005,-1.000

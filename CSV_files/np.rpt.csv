@@ -1,0 +1,5 @@
+energy,scattering_angle,experimental_value,statistical_error,reaction_type,observable,systematic_error,normalization
+220.000000,161.000000,   -0.07000,  0.08000,NP,   RPT , 0.030, 1.000
+225.000000,160.970001,   -0.01800,  0.01000,NP,   RPT , 0.030, 1.000
+325.000000,160.500000,   -0.03000,  0.07000,NP,   RPT , 0.030, 1.000
+332.500000,160.500000,    0.01800,  0.01000,NP,   RPT , 0.030, 1.000

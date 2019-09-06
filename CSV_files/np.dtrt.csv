@@ -1,0 +1,3 @@
+energy,scattering_angle,experimental_value,statistical_error,reaction_type,observable,systematic_error,normalization
+223.000000,160.979996,   -0.01900,  0.00950,NP,   DTRT, 0.003, 1.000
+325.000000,160.539993,   -0.23280,  0.00690,NP,   DTRT, 0.003, 1.000

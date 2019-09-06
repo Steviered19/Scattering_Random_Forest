@@ -1,0 +1,3 @@
+energy,scattering_angle,experimental_value,statistical_error,reaction_type,observable,systematic_error,normalization
+ 52.000000, 90.000000,    0.13000,  0.11000,PP,   CKP , 0.000, 1.000
+315.000000, 45.000000,    0.74000,  0.51000,PP,   CKP , 0.000, 1.000
