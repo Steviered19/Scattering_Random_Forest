@@ -1,6 +1,6 @@
 program convert
 !This program is designed to read the .txt data files so that they can be converted into .csv files
-
+use read_write, only : header, write_data, read_input
 implicit none
 character(len=15) :: dummy_string
 character(len=2) :: reaction_type
@@ -77,154 +77,56 @@ open(newunit=pp_sgtt, file="CSV_files/pp.sgtt.csv", status='unknown')
 
 !read input and write to output
 !write header line on output files
-write(np_dat_output,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(pp_dat_output,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
+call header(np_dat_output)
+call header(pp_dat_output)
 !separated files
-write(np_a,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(np_alfa,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(np_at,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(np_ayy,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(np_azz,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(np_d,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(np_dosk,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(np_dsg_star,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(np_dsg,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(np_dt,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(np_dtrt,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(np_nnkk,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(np_nskn,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(np_nssn,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(np_p,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(np_r,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(np_ref2,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(np_ref3,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(np_rpt,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(np_rt,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(np_sgt,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(np_sgtl,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(np_sgtr,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(np_sgtt,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(pp_a,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(pp_alfa,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(pp_ap,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(pp_axx,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(pp_ayy,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(pp_azx,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(pp_azz,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(pp_ckp,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(pp_d,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(pp_dsg,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(pp_dt,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(pp_mskn,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(pp_mssn,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(pp_p,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(pp_r,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(pp_ref2,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(pp_ref3,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(pp_rp,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(pp_sgt,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(pp_sgte,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(pp_sgtl,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(pp_sgtr,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
-write(pp_sgtt,6) "energy", ',', "scattering_angle", ',', "experimental_value", ',',&
-    &"statistical_error", ',', "reaction_type", ',',"observable", ',', "systematic_error", ',',&
-    &"normalization"
+call header(np_a)
+call header(np_alfa)
+call header(np_at)
+call header(np_ayy)
+call header(np_azz)
+call header(np_d)
+call header(np_dosk)
+call header(np_dsg_star)
+call header(np_dsg)
+call header(np_dt)
+call header(np_dtrt)
+call header(np_nnkk)
+call header(np_nskn)
+call header(np_nssn)
+call header(np_p)
+call header(np_r)
+call header(np_ref2)
+call header(np_ref3)
+call header(np_rpt)
+call header(np_rt)
+call header(np_sgt)
+call header(np_sgtl)
+call header(np_sgtr)
+call header(np_sgtt)
+call header(pp_a)
+call header(pp_alfa)
+call header(pp_ap)
+call header(pp_axx)
+call header(pp_ayy)
+call header(pp_azx)
+call header(pp_azz)
+call header(pp_ckp)
+call header(pp_d)
+call header(pp_dsg)
+call header(pp_dt)
+call header(pp_mskn)
+call header(pp_mssn)
+call header(pp_p)
+call header(pp_r)
+call header(pp_ref2)
+call header(pp_ref3)
+call header(pp_rp)
+call header(pp_sgt)
+call header(pp_sgte)
+call header(pp_sgtl)
+call header(pp_sgtr)
+call header(pp_sgtt)
 
 !np data
 np_line=1 !initialize at line 1
@@ -234,85 +136,60 @@ do
     if (base_lab_energy > 350.0) exit
     read(np_dat_input,*) !bibliographic line
     do z=1, collected_data_points
-        read(np_dat_input,4) lab_energy, scattering_angle, experimental_value, statistical_error !4 columns of data
-        write(np_dat_output,5) lab_energy, ',', scattering_angle, ',', &
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', &
-            & observable, ',', systematic_error, ',', normalization !ouput to .csv file
-!if statements used to output to separated files depending on observable type
-        if (observable == '   A  ') write(np_a,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   ALFA') write(np_alfa,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   AT  ') write(np_at,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   AYY ') write(np_ayy,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   AZZ ') write(np_azz,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   D   ') write(np_d,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   D0SK') write(np_dosk,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   DSG*') write(np_dsg_star,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   DSG ') write(np_dsg,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   DT  ') write(np_dt,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   DTRT') write(np_dtrt,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   NNKK') write(np_nnkk,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   NSKN') write(np_nskn,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   NSSN') write(np_nssn,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   P   ') write(np_p,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   R   ') write(np_r,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   REF2') write(np_ref2,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   REF3') write(np_ref3,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   RPT ') write(np_rpt,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   RT  ') write(np_rt,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   SGT ') write(np_sgt,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   SGTL') write(np_sgtl,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   SGTR') write(np_sgtr,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   SGTT') write(np_sgtt,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
+        call read_input(np_dat_input, lab_energy, scattering_angle, experimental_value, statistical_error)
+        call write_data(np_dat_output, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        !if statements used to output to separated files depending on observable type
+        if (observable == '   A  ') call write_data(np_a, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   ALFA') call write_data(np_alfa, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   AT  ') call write_data(np_at, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   AYY ') call write_data(np_ayy, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   AZZ ') call write_data(np_azz, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   D   ') call write_data(np_d, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   D0SK') call write_data(np_dosk, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   DSG*') call write_data(np_dsg_star, lab_energy, scattering_angle, experimental_value &
+        &, statistical_error, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   DSG ') call write_data(np_dsg, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   DT  ') call write_data(np_dt, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   DTRT') call write_data(np_dtrt, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   NNKK') call write_data(np_nnkk, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   NSKN') call write_data(np_nskn, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   NSSN') call write_data(np_nssn, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   P   ') call write_data(np_p, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   R   ') call write_data(np_r, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   REF2') call write_data(np_ref2, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   REF3') call write_data(np_ref3, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   RPT ') call write_data(np_rpt, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   RT  ') call write_data(np_rt, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   SGT ') call write_data(np_sgt, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   SGTL') call write_data(np_sgtl, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   SGTR') call write_data(np_sgtr, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   SGTT') call write_data(np_sgtt, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
     end do
-np_line=np_line+1 !move to next data set
+    np_line=np_line+1 !move to next data set
 end do
 25 continue
 
@@ -324,80 +201,56 @@ do
     if (base_lab_energy > 350.0) exit
     read(pp_dat_input,*) !bibliographic line
     do z=1, collected_data_points
-        read(pp_dat_input,4) lab_energy, scattering_angle, experimental_value, statistical_error !4 columns of data
-        write(pp_dat_output,5) lab_energy, ',', scattering_angle, ',', experimental_value, ',', &
-            & statistical_error, ',', reaction_type, ',', observable, ',', &
-            & systematic_error, ',', normalization !ouput to .csv file
-!if statements used to output to separated files depending on observable type
-        if (observable == '   A  ') write(pp_a,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   ALFA') write(pp_alfa,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   AP  ') write(pp_ap,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   AXX ') write(pp_axx,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   AYY ') write(pp_ayy,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   AZX ') write(pp_azx,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   AZZ ') write(pp_azz,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   CKP ') write(pp_ckp,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   D   ') write(pp_d,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   DSG ') write(pp_dsg,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   DT  ') write(pp_dt,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   MSKN') write(pp_mskn,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   MSSN') write(pp_mssn,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   P   ') write(pp_p,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   R   ') write(pp_r,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   REF2') write(pp_ref2,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   REF3') write(pp_ref3,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   RP  ') write(pp_rp,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   SGT ') write(pp_sgt,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   SGTE') write(pp_sgte,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   SGTL') write(pp_sgtl,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   SGTR') write(pp_sgtr,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
-        if (observable == '   SGTT') write(pp_sgtt,5) lab_energy, ',', scattering_angle, ',',&
-            & experimental_value, ',', statistical_error, ',', reaction_type, ',', observable, ',',&
-            & systematic_error, ',', normalization
+        call read_input(pp_dat_input, lab_energy, scattering_angle, experimental_value, statistical_error)
+        call write_data(pp_dat_output, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        !if statements used to output to separated files depending on observable type
+        if (observable == '   A  ') call write_data(pp_a, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   ALFA') call write_data(pp_alfa, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   AP  ') call write_data(pp_ap, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   AXX ') call write_data(pp_axx, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   AYY ') call write_data(pp_ayy, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   AZX ') call write_data(pp_azx, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   AZZ ') call write_data(pp_azz, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   CKP ') call write_data(pp_ckp, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   D   ') call write_data(pp_d, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   DSG ') call write_data(pp_dsg, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   DT  ') call write_data(pp_dt, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   MSKN') call write_data(pp_mskn, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   MSSN') call write_data(pp_mssn, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   P   ') call write_data(pp_p, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   R   ') call write_data(pp_r, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   REF2') call write_data(pp_ref2, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   REF3') call write_data(pp_ref3, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   RP  ') call write_data(pp_rp, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   SGT ') call write_data(pp_sgt, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   SGTE') call write_data(pp_sgte, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   SGTL') call write_data(pp_sgtl, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   SGTR') call write_data(pp_sgtr, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   SGTT') call write_data(pp_sgtt, lab_energy, scattering_angle, experimental_value, statistical_error &
+        &, reaction_type, observable, systematic_error, normalization)
     end do
     pp_line=pp_line+1 !move to next data set
 end do
