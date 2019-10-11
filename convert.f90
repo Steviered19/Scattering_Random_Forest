@@ -13,7 +13,7 @@ integer :: np_dat_input, pp_dat_input, np_dat_output, pp_dat_output !file unit i
 !addition unit identifiers for observable-separated files
 integer :: np_a, np_alfa, np_at, np_ayy, np_azz, np_d, np_dosk, np_dsg, np_dsg_star, np_dt
 integer :: np_dtrt, np_nnkk, np_nskn, np_nssn, np_p, np_r, np_ref2, np_ref3, np_rpt, np_rt
-integer :: np_sgt, np_sgtl, np_sgtr, np_sgtt
+integer :: np_sgt, np_sgtl, np_sgtr, np_sgtt, np_sgt_and_sgtt
 integer :: pp_a, pp_alfa, pp_ap, pp_axx, pp_ayy, pp_azx, pp_azz, pp_ckp, pp_d, pp_dsg
 integer :: pp_dt, pp_mskn, pp_mssn, pp_p, pp_r, pp_ref2, pp_ref3, pp_rp, pp_sgt, pp_sgte
 integer :: pp_sgtl, pp_sgtr, pp_sgtt
@@ -75,6 +75,9 @@ open(newunit=pp_sgtl, file="CSV_files/pp.sgtl.csv", status='unknown')
 open(newunit=pp_sgtr, file="CSV_files/pp.sgtr.csv", status='unknown')
 open(newunit=pp_sgtt, file="CSV_files/pp.sgtt.csv", status='unknown')
 
+open(newunit=np_sgt_and_sgtt, file="CSV_files/np.sgt_and_sgtt.csv", status='unknown')
+
+
 !read input and write to output
 !write header line on output files
 call header(np_dat_output)
@@ -127,6 +130,8 @@ call header(pp_sgte)
 call header(pp_sgtl)
 call header(pp_sgtr)
 call header(pp_sgtt)
+
+call header(np_sgt_and_sgtt)
 
 !np data
 np_line=1 !initialize at line 1
@@ -188,6 +193,8 @@ do
         &, reaction_type, observable, systematic_error, normalization)
         if (observable == '   SGTT') call write_data(np_sgtt, lab_energy, scattering_angle, experimental_value, statistical_error &
         &, reaction_type, observable, systematic_error, normalization)
+        if (observable == '   SGT ' .or. observable == '   SGTT') call write_data(np_sgt_and_sgtt, lab_energy, scattering_angle, &
+        & experimental_value, statistical_error, reaction_type, observable, systematic_error, normalization)
     end do
     np_line=np_line+1 !move to next data set
 end do
@@ -315,5 +322,7 @@ close(pp_sgte)
 close(pp_sgtl)
 close(pp_sgtr)
 close(pp_sgtt)
+
+close(np_sgt_and_sgtt)
 
 end program convert
