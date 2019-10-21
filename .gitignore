@@ -4,3 +4,9 @@ Plots/*.pdf
 Scattering Forest.ipynb
 ppnew3sig.dat.txt
 npnew3sig.dat.txt
+.DS_Store
+.ipynb_checkpoints/
+small_tree.dot
+small_tree.png
+tree.dot
+tree.png
