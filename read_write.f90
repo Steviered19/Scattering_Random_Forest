@@ -1,6 +1,5 @@
 module read_write
 implicit none
-private
 public header, write_data, read_input
 
 contains

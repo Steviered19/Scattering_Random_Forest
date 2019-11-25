@@ -1,6 +1,6 @@
 program convert
 !This program is designed to read the .txt data files so that they can be converted into .csv files
-use read_write, only : header, write_data, read_input
+use read_write
 implicit none
 character(len=15) :: dummy_string
 character(len=2) :: reaction_type
